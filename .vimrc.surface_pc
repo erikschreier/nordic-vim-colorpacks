@@ -1,0 +1,84 @@
+" vim: ts=4 sts=4 sw=4 tw=79 cc=+1 et ai ff=unix
+"==============================================================================
+" Author:  Erik Schreier - erik-schreier@gmx.de
+" Source:  https://github.com/erikschreier/nordic-vim
+" Comment: Statusbar by meskarune (https://gist.github.com/meskarune)
+" Version: 1.0 (Jun 12 2019)
+" File:    ~/.vim/.vimrc.surface
+"==============================================================================
+" Colorscheme settings
+"------------------------------------------------------------------------------
+let g:PaperColor_Theme_Options = {
+\   'theme': {
+\       'default': {
+\           'transparent_background': 1,
+\           'allow_bold': 1,
+\           'allow_italic': 1
+\       }
+\   },
+\   'language': {
+\       'python': {
+\           'highlight_builtins': 1
+\       }
+\   }
+\}
+"------------------------------------------------------------------------------
+" Colorscheme setup
+"------------------------------------------------------------------------------
+set background=dark
+colorscheme PaperColor
+"==============================================================================
+" Statusbar
+"==============================================================================
+au InsertEnter * hi statusline guifg=#d7875f guibg=#3a3a3a ctermfg=001 ctermbg=000
+au InsertLeave * hi statusline guifg=#d7875f guibg=#3a3a3a ctermfg=002 ctermbg=000
+                 hi statusline guifg=#d7875f guibg=#3a3a3a ctermfg=002 ctermbg=000
+"------------------------------------------------------------------------------
+" Convert VIM keys in human readable code
+"------------------------------------------------------------------------------
+let g:currentmode={
+    \ 'n'  : 'Normal',
+    \ 'no' : 'Normal·Operator Pending',
+    \ 'v'  : 'Visual',
+    \ 'V'  : 'V·Line',
+    \ '^V' : 'V·Block',
+    \ 's'  : 'Select',
+    \ 'S'  : 'S·Line',
+    \ '^S' : 'S·Block',
+    \ 'i'  : 'Insert',
+    \ 'R'  : 'Replace',
+    \ 'Rv' : 'V·Replace',
+    \ 'c'  : 'Command',
+    \ 'cv' : 'Vim Ex',
+    \ 'ce' : 'Ex',
+    \ 'r'  : 'Prompt',
+    \ 'rm' : 'More',
+    \ 'r?' : 'Confirm',
+    \ '!'  : 'Shell',
+    \ 't'  : 'Terminal'
+    \}
+"------------------------------------------------------------------------------
+" Draw statusbar
+"------------------------------------------------------------------------------
+set noshowmode
+set statusline=
+set statusline+=%0*\ %n\                                 " buffern number
+set statusline+=%1*\ %<%F%m%r%h%w\                       " path and status
+set statusline+=%3*| 
+set statusline+=%2*\ %Y\                                 " filetype
+set statusline+=%3*| 
+set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}     " encoding
+set statusline+=\ (%{&ff})\                              " fileformat
+set statusline+=%= 
+set statusline+=%2*\ col:\ %02v\                         " column
+set statusline+=%3*| 
+set statusline+=%1*\ ln:\ %02l/%L\ (%3p%%)\              " line and position
+set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " current mode
+"------------------------------------------------------------------------------
+" Statusbar Colors
+"------------------------------------------------------------------------------
+hi User1 guifg=#808080 guibg=#3a3a3a ctermfg=007 ctermbg=000
+hi User2 guifg=#808080 guibg=#585858 ctermfg=007 ctermbg=008
+hi User3 guifg=#585858 guibg=#585858 ctermfg=008 ctermbg=008
+hi User4 guifg=#3a3a3a guibg=#3a3a3a ctermfg=000 ctermbg=000
+"==============================================================================
